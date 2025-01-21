@@ -62,8 +62,8 @@
                 </div>
 
                 <!-- Remember Me -->
-                <div class="flex items-center justify-between">
-                    <label for="remember_me" class="inline-flex items-center">
+                <div class="flex items-center justify-end">
+                    {{-- <label for="remember_me" class="inline-flex items-center">
                         <input
                             id="remember_me"
                             type="checkbox"
@@ -74,7 +74,7 @@
                         <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">
                             {{ __('Remember me') }}
                         </span>
-                    </label>
+                    </label> --}}
 
                     @if (Route::has('password.request'))
                         <a class="text-sm text-blue-500 hover:underline" href="{{ route('password.request') }}">

@@ -7,7 +7,7 @@
             </x-slot>
         </x-sidebar.link>
 
-        <x-sidebar.link title="Orders" href="{{ route('dashboard') }}" :isActive="request()->routeIs('dashboard')">
+        <x-sidebar.link title="Orders" href="{{ route('admin.orders.index') }}" :isActive="request()->routeIs('admin.orders*')">
             <x-slot name="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-6">
