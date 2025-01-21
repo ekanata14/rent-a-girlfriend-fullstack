@@ -5,9 +5,9 @@
                 {{ __('Orders') }}
             </h2>
         </div>
-        <x-button href="{{ route('admin.orders.create') }}">
+        {{-- <x-button href="{{ route('admin.orders.create') }}">
             Create Order
-        </x-button>
+        </x-button> --}}
     </x-slot>
 
     <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">

@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 // Models
 use App\Models\User;
-use Illuminate\Validation\Rule;
+use App\Models\UserPackage;
 
 class UsersController extends Controller
 {
@@ -83,6 +84,7 @@ class UsersController extends Controller
         $viewData = [
             'title' => 'User Details',
             'user' => User::findOrFail($id),
+            'userPackages' => UserPackage::where('user_id', $id)->get(),
         ];
 
         return view('admin.users.show', $viewData);
