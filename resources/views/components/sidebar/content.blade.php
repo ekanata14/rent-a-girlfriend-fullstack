@@ -28,6 +28,11 @@
             </x-slot>
         </x-sidebar.link>
     @elseif(auth()->user()->role == 1)
+        <x-sidebar.link title="Dashboard" href="{{ route('dashboard') }}" :isActive="request()->routeIs('dashboard')">
+            <x-slot name="icon">
+                <x-icons.dashboard class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
+            </x-slot>
+        </x-sidebar.link>
     @endif
 
 </x-perfect-scrollbar>

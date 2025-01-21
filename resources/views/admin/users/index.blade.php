@@ -85,6 +85,9 @@
                                 {{ $user->mobile_phone }}
                             </td>
                             <td class="flex gap-2">
+                                <x-button href="{{ route('admin.users.show', $user->id) }}">
+                                    Detail
+                                </x-button>
                                 <x-button variant="warning" href="{{ route('admin.users.edit', $user->id) }}">
                                     Edit
                                 </x-button>

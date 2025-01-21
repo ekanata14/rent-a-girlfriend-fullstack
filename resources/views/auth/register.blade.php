@@ -3,15 +3,15 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
             @csrf
 
             <div class="grid gap-6">
-                <!-- Name -->
+                <!-- Username -->
                 <div class="space-y-2">
                     <x-form.label
-                        for="name"
-                        :value="__('Name')"
+                        for="username"
+                        :value="__('Username')"
                     />
 
                     <x-form.input-with-icon-wrapper>
@@ -21,14 +21,14 @@
 
                         <x-form.input
                             withicon
-                            id="name"
+                            id="username"
                             class="block w-full"
                             type="text"
-                            name="name"
-                            :value="old('name')"
+                            name="username"
+                            :value="old('username')"
                             required
                             autofocus
-                            placeholder="{{ __('Name') }}"
+                            placeholder="{{ __('Username') }}"
                         />
                     </x-form.input-with-icon-wrapper>
                 </div>
@@ -54,6 +54,129 @@
                             :value="old('email')"
                             required
                             placeholder="{{ __('Email') }}"
+                        />
+                    </x-form.input-with-icon-wrapper>
+                </div>
+
+                <!-- Age -->
+                <div class="space-y-2">
+                    <x-form.label
+                        for="age"
+                        :value="__('Age')"
+                    />
+
+                    <x-form.input-with-icon-wrapper>
+                        <x-slot name="icon">
+                            <x-heroicon-o-calendar aria-hidden="true" class="w-5 h-5" />
+                        </x-slot>
+
+                        <x-form.input
+                            withicon
+                            id="age"
+                            class="block w-full"
+                            type="number"
+                            name="age"
+                            :value="old('age')"
+                            required
+                            placeholder="{{ __('Age') }}"
+                        />
+                    </x-form.input-with-icon-wrapper>
+                </div>
+
+                <!-- Height -->
+                <div class="space-y-2">
+                    <x-form.label
+                        for="height"
+                        :value="__('Height')"
+                    />
+
+                    <x-form.input-with-icon-wrapper>
+                        <x-slot name="icon">
+                            {{-- <x-heroicon-o-ruler aria-hidden="true" class="w-5 h-5" /> --}}
+                        </x-slot>
+
+                        <x-form.input
+                            withicon
+                            id="height"
+                            class="block w-full"
+                            type="number"
+                            name="height"
+                            :value="old('height')"
+                            required
+                            placeholder="{{ __('Height (cm)') }}"
+                        />
+                    </x-form.input-with-icon-wrapper>
+                </div>
+
+                <!-- Gender -->
+                <div class="space-y-2">
+                    <x-form.label
+                        for="gender"
+                        :value="__('Gender')"
+                    />
+
+                    <x-form.input-with-icon-wrapper>
+                        <x-slot name="icon">
+                            {{-- <x-heroicon-o-user-group aria-hidden="true" class="w-5 h-5" /> --}}
+                        </x-slot>
+
+                        <select
+                            id="gender"
+                            name="gender"
+                            class="block w-full mt-1"
+                            required
+                        >
+                            <option value="">{{ __('Select Gender') }}</option>
+                            <option value="0">{{ __('Male') }}</option>
+                            <option value="1">{{ __('Female') }}</option>
+                        </select>
+                    </x-form.input-with-icon-wrapper>
+                </div>
+
+                <!-- Mobile Phone -->
+                <div class="space-y-2">
+                    <x-form.label
+                        for="mobile_phone"
+                        :value="__('Mobile Phone')"
+                    />
+
+                    <x-form.input-with-icon-wrapper>
+                        <x-slot name="icon">
+                            <x-heroicon-o-phone aria-hidden="true" class="w-5 h-5" />
+                        </x-slot>
+
+                        <x-form.input
+                            withicon
+                            id="mobile_phone"
+                            class="block w-full"
+                            type="text"
+                            name="mobile_phone"
+                            :value="old('mobile_phone')"
+                            required
+                            placeholder="{{ __('Mobile Phone') }}"
+                        />
+                    </x-form.input-with-icon-wrapper>
+                </div>
+
+                <!-- Profile Picture -->
+                <div class="space-y-2">
+                    <x-form.label
+                        for="profile_picture"
+                        :value="__('Profile Picture')"
+                    />
+
+                    <x-form.input-with-icon-wrapper>
+                        <x-slot name="icon">
+                            <x-heroicon-o-camera aria-hidden="true" class="w-5 h-5" />
+                        </x-slot>
+
+                        <x-form.input
+                            withicon
+                            id="profile_picture"
+                            class="block w-full"
+                            type="file"
+                            name="profile_picture"
+                            required
                         />
                     </x-form.input-with-icon-wrapper>
                 </div>
