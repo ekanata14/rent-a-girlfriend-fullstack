@@ -135,9 +135,9 @@
                                             Rating
                                         </x-button>
                                     @endif
-                                    <x-button variant="info" type="submit" onclick="return confirm('Are you sure?')">
+                                    {{-- <x-button variant="info" type="submit" onclick="return confirm('Are you sure?')">
                                         Chat {{ $order->package->user->username }}
-                                    </x-button>
+                                    </x-button> --}}
                                 @endif
                             </td>
                         </tr>
