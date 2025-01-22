@@ -1219,7 +1219,14 @@
             Rent a Girlfriend
         </h2>
         <div class="space-x-4">
-            @if (auth()->user)
+            @if (!auth()->user())
+                <a href="{{ route('register') }}">
+                    <button class="bg-pink text-white font-bold py-2 px-4 rounded">Register</button>
+                </a>
+                <a href="{{ route('login') }}">
+                    <button class="bg-white text-pink font-bold py-2 px-4 rounded">Login</button>
+                </a>
+            @else 
                 @if (auth()->user()->role == 0)
                     <a href="{{ route('admin.dashboard') }}">
                         <button class="bg-pink text-white font-bold py-2 px-4 rounded">Dashboard</button>
@@ -1229,13 +1236,6 @@
                         <button class="bg-pink text-white font-bold py-2 px-4 rounded">Dashboard</button>
                     </a>
                 @endif
-            @else
-                <a href="{{ route('register') }}">
-                    <button class="bg-pink text-white font-bold py-2 px-4 rounded">Register</button>
-                </a>
-                <a href="{{ route('login') }}">
-                    <button class="bg-white text-pink font-bold py-2 px-4 rounded">Login</button>
-                </a>
             @endif
         </div>
     </header>
