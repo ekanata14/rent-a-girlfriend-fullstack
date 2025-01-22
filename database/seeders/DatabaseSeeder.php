@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         User::create([
-            'username' => 'Test User',
+            'username' => 'Admin',
             'email' => 'admin@example.com',
             'age' => 30,
             'height' => 175,
