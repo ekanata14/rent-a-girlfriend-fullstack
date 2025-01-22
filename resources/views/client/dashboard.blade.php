@@ -31,12 +31,12 @@
         </div>
     </form>
 
-    <div class="grid grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-4 mt-6">
         @forelse ($users as $user)
             <div
                 class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-center">
-                <a href="#">
-                    <img class="rounded-t-lg" src="{{ Storage::url($user->profile_picture) }}"
+                <a href="#" class="flex justify-center h-[200px]">
+                    <img class="rounded-t-lg h-full" src="{{ Storage::url($user->profile_picture) }}"
                         alt="{{ $user->username }}" />
                 </a>
                 <div class="p-5">
