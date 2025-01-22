@@ -8,6 +8,7 @@ class UserPackage extends Model
 {
     protected $fillable = [
         'user_id',
+        'title',
         'price',
         'duration',
         'available',

@@ -15,8 +15,10 @@ class UserPackageController extends Controller
     {
         $viewData = [
             'title' => 'User Packages',
-            'userPackages' => UserPackage::all(),
+            'userPackages' => UserPackage::where('user_id', auth()->user()->id)->get(),
         ];
+
+        return view('client.user-packages.index', $viewData);
     }
 
     /**
@@ -28,7 +30,7 @@ class UserPackageController extends Controller
             'title' => 'Create User Package',
         ];
 
-        return view('admin.user-packages.create', $viewData);
+        return view('client.user-packages.create', $viewData);
     }
 
     /**
@@ -38,6 +40,7 @@ class UserPackageController extends Controller
     {
         $validatedData = $request->validate([
             'user_id' => ['required', 'integer'],
+            'title' => ['required', 'string'],
             'price' => ['required', 'numeric'],
             'duration' => ['required', 'integer'],
             'available' => ['required', 'boolean'],
@@ -49,6 +52,8 @@ class UserPackageController extends Controller
             UserPackage::create($validatedData);
 
             DB::commit();
+
+            return redirect()->route('client.user-packages.index')->with('success', 'User package created successfully');
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -66,7 +71,7 @@ class UserPackageController extends Controller
             'userPackage' => UserPackage::findOrFail($id),
         ];
 
-        return view('admin.user-packages.show', $viewData);
+        return view('client.user-packages.show', $viewData);
     }
 
     /**
@@ -79,7 +84,7 @@ class UserPackageController extends Controller
             'userPackage' => UserPackage::findOrFail($id),
         ];
 
-        return view('admin.user-packages.edit', $viewData);
+        return view('client.user-packages.edit', $viewData);
     }
 
     /**
@@ -89,6 +94,7 @@ class UserPackageController extends Controller
     {
         $validatedData = $request->validate([
             'user_id' => ['required', 'integer'],
+            'title' => ['required', 'string'],
             'price' => ['required', 'numeric'],
             'duration' => ['required', 'integer'],
             'available' => ['required', 'boolean'],
@@ -99,8 +105,8 @@ class UserPackageController extends Controller
         try {
             $userPackage = UserPackage::findOrFail($request->id);
             $userPackage->update($validatedData);
-
             DB::commit();
+            return redirect()->route('client.user-packages.index')->with('success', 'User package updated successfully');
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -116,13 +122,15 @@ class UserPackageController extends Controller
         DB::beginTransaction();
 
         try {
-            UserPackage::findOrFail($request->id)->delete();
+            $userPackage = UserPackage::where('id', $request->id)->first();
+            $userPackage->delete();
 
             DB::commit();
+
+            return redirect()->route('client.user-packages.index')->with('success', 'User package deleted successfully');
         } catch (\Exception $e) {
             DB::rollBack();
-
-            return back()->with('error', 'Failed to delete user package');
+            return back()->with('error', 'Failed to delete user package '. $e->getMessage());
         }
     }
 }

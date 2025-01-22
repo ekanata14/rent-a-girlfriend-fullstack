@@ -10,6 +10,7 @@ class Rating extends Model
         'id',
         'gf_bf_id',
         'user_id',
+        'order_id',
         'rate',
         'review',
     ];

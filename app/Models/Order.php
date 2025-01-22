@@ -9,6 +9,8 @@ class Order extends Model
     protected $fillable = [
         'id',
         'package_id',
+        'date',
+        'payment_receipt',
         'user_id',
         'total_price',
         'status',
@@ -17,6 +19,11 @@ class Order extends Model
     public function package()
     {
         return $this->belongsTo(UserPackage::class, 'package_id');
+    }
+
+    public function rating()
+    {
+        return $this->hasOne(Rating::class, 'order_id');
     }
 
     public function user()

@@ -83,6 +83,51 @@ Route::middleware(['checkAuth', 'IsAdmin'])->group(function () {
 Route::middleware(['checkAuth', 'IsClient'])->group(function () {
     // Dashboard
     Route::get('/client/dashboard', [ClientDashboardController::class, 'index'])->name('client.dashboard');
+    Route::post('/client/dashboard/search', [ClientDashboardController::class, 'search'])->name('admin.dashboard.search');
+
+    // Users
+    Route::get('/client/users/{id}', [UsersController::class, 'show'])->name('client.users.show');
+
+    // Orders
+    Route::get('/client/orders', [OrderController::class, 'index'])->name('client.orders.index');
+    Route::get('/client/orders/incoming', [OrderController::class, 'incoming'])->name('incoming.client.orders');
+    Route::get('/client/orders/create/{packageId}', [OrderController::class, 'create'])->name('client.orders.create');
+    Route::get('/client/orders/{id}', [OrderController::class, 'show'])->name('client.orders.show');
+    Route::post('/client/orders', [OrderController::class, 'store'])->name('client.orders.store');
+    Route::get('/client/orders/{id}/edit', [OrderController::class, 'edit'])->name('client.orders.edit');
+    Route::put('/client/orders', [OrderController::class, 'update'])->name('client.orders.update');
+    Route::delete('/client/orders', [OrderController::class, 'destroy'])->name('client.orders.destroy');
+
+    Route::post('/client/orders/accept', [OrderController::class, 'acceptOrder'])->name('client.orders.accept');
+    Route::post('/client/orders/reject', [OrderController::class, 'rejectOrder'])->name('client.orders.reject');
+    Route::post('/client/orders/finish', [OrderController::class, 'finishOrder'])->name('client.orders.finish');
+
+    // Messages
+    Route::get('/client/messages', [MessageController::class, 'index'])->name('client.messages.index');
+    Route::get('/client/messages/create', [MessageController::class, 'create'])->name('client.messages.create');
+    Route::get('/client/messages/{id}', [MessageController::class, 'show'])->name('client.messages.show');
+    Route::post('/client/messages', [MessageController::class, 'store'])->name('client.messages.store');
+    Route::get('/client/messages/{id}/edit', [MessageController::class, 'edit'])->name('client.messages.edit');
+    Route::put('/client/messages', [MessageController::class, 'update'])->name('client.messages.update');
+    Route::delete('/client/messages', [MessageController::class, 'destroy'])->name('client.messages.destroy');
+
+    // User Packages
+    Route::get('/client/user-packages', [UserPackageController::class, 'index'])->name('client.user-packages.index');
+    Route::get('/client/user-packages/create', [UserPackageController::class, 'create'])->name('client.user-packages.create');
+    Route::get('/client/user-packages/{id}', [UserPackageController::class, 'show'])->name('client.user-packages.show');
+    Route::post('/client/user-packages', [UserPackageController::class, 'store'])->name('client.user-packages.store');
+    Route::get('/client/user-packages/{id}/edit', [UserPackageController::class, 'edit'])->name('client.user-packages.edit');
+    Route::put('/client/user-packages', [UserPackageController::class, 'update'])->name('client.user-packages.update');
+    Route::delete('/client/user-packages', [UserPackageController::class, 'destroy'])->name('client.user-packages.destroy');
+
+    // Ratings
+    Route::get('/client/ratings', [RatingController::class, 'index'])->name('client.ratings.index');
+    Route::get('/client/ratings/create/{gfBfId}', [RatingController::class, 'create'])->name('client.ratings.create');
+    Route::get('/client/ratings/{id}', [RatingController::class, 'show'])->name('client.ratings.show');
+    Route::post('/client/ratings', [RatingController::class, 'store'])->name('client.ratings.store');
+    Route::get('/client/ratings/{id}/edit', [RatingController::class, 'edit'])->name('client.ratings.edit');
+    Route::put('/client/ratings', [RatingController::class, 'update'])->name('client.ratings.update');
+    Route::delete('/client/ratings', [RatingController::class, 'destroy'])->name('client.ratings.destroy');
 });
 
 

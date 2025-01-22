@@ -15,10 +15,16 @@ class MessageController extends Controller
     {
         $viewData = [
             'title' => 'Messages',
-            'messages' => Message::all(),
+            'messages' => Message::with(['recipient', 'sender'])
+                ->where('recipient_id', auth()->user()->id)
+                ->orderBy('created_at', 'desc')
+                ->get()
+                ->groupBy('sender.id'),
         ];
 
-        return view('admin.messages.index', $viewData);
+        // return $viewData;
+
+        return view('client.messages.index', $viewData);
     }
 
     /**

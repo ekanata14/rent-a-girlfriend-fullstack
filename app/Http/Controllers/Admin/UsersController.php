@@ -65,8 +65,18 @@ class UsersController extends Controller
         DB::beginTransaction();
 
         try {
-            $user = User::create($validatedData);
+            if ($request->hasFile('profile_picture')) {
+                $originalName = pathinfo($request->file('profile_picture')->getClientOriginalName(), PATHINFO_FILENAME);
+                $extension = $request->file('profile_picture')->getClientOriginalExtension();
+                $username = $validatedData['username'];
+                $date = now()->format('Ymd_His');
+                $filename = "{$username}_{$date}.{$extension}";
+                $path = $request->file('profile_picture')->storeAs('profile_pictures', $filename, 'public');
+                $validatedData['profile_picture'] = $path;
+            }
 
+            $validatedData['password'] = bcrypt($validatedData['password']);
+            $user = User::create($validatedData);
             DB::commit();
 
             return redirect()->route('admin.users.index')->with('success', 'User created successfully.');
@@ -116,7 +126,6 @@ class UsersController extends Controller
                 'lowercase',
                 'email',
                 'max:255',
-                Rule::unique(User::class)->ignore($request->user()->id),
             ],
             'age' => ['required', 'integer'],
             'height' => ['required', 'integer'],

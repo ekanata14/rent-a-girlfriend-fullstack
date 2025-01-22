@@ -15,7 +15,6 @@
                         d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
                 </svg>
             </x-slot>
-
         </x-sidebar.link>
 
         <x-sidebar.link title="Users" href="{{ route('admin.users.index') }}" :isActive="request()->routeIs('admin.users*')">
@@ -28,11 +27,32 @@
             </x-slot>
         </x-sidebar.link>
     @elseif(auth()->user()->role == 1)
-        <x-sidebar.link title="Dashboard" href="{{ route('dashboard') }}" :isActive="request()->routeIs('dashboard')">
+        <x-sidebar.link title="Dashboard" href="{{ route('client.dashboard') }}" :isActive="request()->routeIs('client.dashboard*')">
             <x-slot name="icon">
                 <x-icons.dashboard class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
             </x-slot>
         </x-sidebar.link>
+        <x-sidebar.link title="Incoming Orders" href="{{ route('incoming.client.orders') }}" :isActive="request()->routeIs('incoming.client.orders')">
+            <x-slot name="icon">
+                <x-icons.dashboard class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
+            </x-slot>
+        </x-sidebar.link>
+        <x-sidebar.link title="Your Orders" href="{{ route('client.orders.index') }}" :isActive="request()->routeIs('client.orders*')">
+            <x-slot name="icon">
+                <x-icons.dashboard class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
+            </x-slot>
+        </x-sidebar.link>
+        <x-sidebar.link title="Your Packages" href="{{ route('client.user-packages.index') }}" :isActive="request()->routeIs('client.user-packages*')">
+            <x-slot name="icon">
+                <x-icons.dashboard class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
+            </x-slot>
+        </x-sidebar.link>
+
+        {{-- <x-sidebar.link title="Chats" href="{{ route('client.messages.index') }}" :isActive="request()->routeIs('client.messages*')">
+            <x-slot name="icon">
+                <x-icons.dashboard class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
+            </x-slot>
+        </x-sidebar.link> --}}
     @endif
 
 </x-perfect-scrollbar>

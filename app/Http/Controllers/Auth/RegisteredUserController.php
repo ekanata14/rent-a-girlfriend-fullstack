@@ -29,9 +29,9 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'username' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'age' => ['required', 'integer', 'min:18'],
             'height' => ['required', 'numeric'],
             'gender' => ['required', 'string'],
@@ -40,22 +40,28 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'username' => $request->username,
-            'email' => $request->email,
-            'age' => $request->age,
-            'height' => $request->height,
-            'role' => 1,
-            'gender' => $request->gender,
-            'mobile_phone' => $request->mobile_phone,
-            'profile_picture' => $request->profile_picture,
-            'password' => Hash::make($request->password),
-        ]);
+        $validatedData['password'] = Hash::make($validatedData['password']);
+        if ($request->hasFile('profile_picture')) {
+            $originalName = pathinfo($request->file('profile_picture')->getClientOriginalName(), PATHINFO_FILENAME);
+            $extension = $request->file('profile_picture')->getClientOriginalExtension();
+            $username = $validatedData['username'];
+            $date = now()->format('Ymd_His');
+            $filename = "{$username}_{$date}.{$extension}";
+            $path = $request->file('profile_picture')->storeAs('profile_pictures', $filename, 'public');
+            $validatedData['profile_picture'] = $path;
+        }
+        $validatedData['role'] = 1;
+
+        $user = User::create($validatedData);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        if ($user->role == 0) {
+            return redirect(route('admin.dashboard', absolute: false));
+        } else if ($user->role == 1) {
+            return redirect(route('client.dashboard', absolute: false));
+        }
     }
 }

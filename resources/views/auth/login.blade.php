@@ -76,11 +76,11 @@
                         </span>
                     </label> --}}
 
-                    @if (Route::has('password.request'))
+                    {{-- @if (Route::has('password.request'))
                         <a class="text-sm text-blue-500 hover:underline" href="{{ route('password.request') }}">
                             {{ __('Forgot your password?') }}
                         </a>
-                    @endif
+                    @endif --}}
                 </div>
 
                 <div>

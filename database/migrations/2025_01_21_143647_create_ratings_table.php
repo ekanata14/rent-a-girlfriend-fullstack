@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreign('gf_bf_id')->references('id')->on('users');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('order_id');
+            $table->foreign('order_id')->references('id')->on('orders');
             $table->integer('rate');
             $table->text('review');
             $table->timestamps();

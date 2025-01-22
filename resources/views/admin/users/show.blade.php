@@ -65,7 +65,10 @@
                                 No
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                User ID
+                                User
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Title
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Price
@@ -76,9 +79,11 @@
                             <th scope="col" class="px-6 py-3">
                                 Available
                             </th>
-                            {{-- <th scope="col" class="px-6 py-3">
-                                Actions
-                            </th> --}}
+                            @if (auth()->user()->role == 1)
+                                <th scope="col" class="px-6 py-3">
+                                    Actions
+                                </th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -92,29 +97,24 @@
                                     {{ $item->User->username }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $item->price }}
+                                    {{ $item->title }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $item->duration }}
+                                    IDR {{ number_format($item->price, 0, ',', '.') }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $item->duration }} Hour(s)
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $item->available ? 'Yes' : 'No' }}
                                 </td>
-                                {{-- <td class="flex gap-2">
-                                    <x-button href="{{ route('admin.items.show', $item->id) }}">
-                                        Detail
-                                    </x-button>
-                                    <x-button variant="warning" href="{{ route('admin.users.edit', $item->id) }}">
-                                        Edit
-                                    </x-button>
-                                    <form action="{{ route('admin.items.destroy', $item->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <x-button variant="danger" onclick="return confirm('Are you sure?')">
-                                            Delete
+                                @if (auth()->user()->role == 1 && $item->available == true)
+                                    <td class="flex gap-2">
+                                        <x-button href="{{ route('client.orders.create', $item->id) }}">
+                                            Order
                                         </x-button>
-                                    </form>
-                                </td> --}}
+                                    </td>
+                                @endif
                             </tr>
                         @empty
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">

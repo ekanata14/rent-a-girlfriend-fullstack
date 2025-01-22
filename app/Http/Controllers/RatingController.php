@@ -6,6 +6,9 @@ use App\Models\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+// Models
+use App\Models\Order;
+
 class RatingController extends Controller
 {
     /**
@@ -24,13 +27,14 @@ class RatingController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $orderId)
     {
         $viewData = [
             'title' => 'Create Rating',
+            'order' => Order::findOrFail($orderId),
         ];
 
-        return view('admin.ratings.create', $viewData);
+        return view('client.ratings.create', $viewData);
     }
 
     /**
@@ -41,6 +45,7 @@ class RatingController extends Controller
         $validatedData = $request->validate([
             'gf_bf_id' => ['required', 'integer'],
             'user_id' => ['required', 'integer'],
+            'order_id' => ['required', 'integer'],
             'rate' => ['required', 'integer'],
             'review' => ['required', 'string'],
         ]);
@@ -50,6 +55,8 @@ class RatingController extends Controller
         try {
             Rating::create($validatedData);
             DB::commit();
+
+            return redirect()->route('client.orders.index')->with('success', 'Rating created successfully');
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -91,6 +98,7 @@ class RatingController extends Controller
         $validatedData = $request->validate([
             'gf_bf_id' => ['required', 'integer'],
             'user_id' => ['required', 'integer'],
+            'order_id' => ['required', 'integer'],
             'rate' => ['required', 'integer'],
             'review' => ['required', 'string'],
         ]);

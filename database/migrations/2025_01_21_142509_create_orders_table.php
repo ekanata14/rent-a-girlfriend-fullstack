@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreign('package_id')->references('id')->on('user_packages')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('payment_receipt');
+            $table->date('date');
             $table->integer('total_price');
             $table->string('status');
             $table->timestamps();
