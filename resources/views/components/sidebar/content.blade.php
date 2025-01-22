@@ -27,7 +27,7 @@
             </x-slot>
         </x-sidebar.link>
     @elseif(auth()->user()->role == 1)
-        <x-sidebar.link title="Dashboard" href="{{ route('client.dashboard') }}" :isActive="request()->routeIs('client.dashboard*')">
+        <x-sidebar.link title="Dashboard" href="{{ route('client.dashboard') }}" :isActive="request()->routeIs('client.dashboard*') || request()->routeIs('client.dashboard.search')">
             <x-slot name="icon">
                 <x-icons.dashboard class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
             </x-slot>

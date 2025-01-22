@@ -83,7 +83,7 @@ Route::middleware(['checkAuth', 'IsAdmin'])->group(function () {
 Route::middleware(['checkAuth', 'IsClient'])->group(function () {
     // Dashboard
     Route::get('/client/dashboard', [ClientDashboardController::class, 'index'])->name('client.dashboard');
-    Route::post('/client/dashboard/search', [ClientDashboardController::class, 'search'])->name('admin.dashboard.search');
+    Route::post('/client/dashboard/search', [ClientDashboardController::class, 'search'])->name('client.dashboard.search');
 
     // Users
     Route::get('/client/users/{id}', [UsersController::class, 'show'])->name('client.users.show');

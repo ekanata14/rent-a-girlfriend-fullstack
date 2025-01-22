@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'K UI') }}</title>
+    <title>{{ config('app.name', 'Rent a Girlfriend') }}</title>
 
     <!-- Fonts -->
     <link
@@ -15,6 +15,9 @@
 
     {{-- DataTables --}}
     {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"> --}}
+
+    {{-- icon --}}
+    <link rel="icon" href="{{ asset('assets/images/rent-a-gf.jpg') }}">
 
     <!-- Styles -->
     <style>

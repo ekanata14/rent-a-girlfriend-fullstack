@@ -29,6 +29,9 @@
 
                         <x-form.error :messages="$errors->get('user_id')" />
                     </div>
+
+                    <h4 class="text-xl text-center">QRIS</h4>
+                    <img src="{{ asset('assets/images/qrcode.png') }}" alt="qrcode" class="h-56 mx-auto" />
                     <div class="space-y-2">
                         <x-form.label for="payment_receipt" :value="__('Payment Receipt')" />
 
