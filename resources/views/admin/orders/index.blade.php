@@ -124,9 +124,9 @@
                                             </x-button>
                                         </form>
                                     @endif
-                                    <x-button variant="info" type="submit" onclick="return confirm('Are you sure?')">
+                                    {{-- <x-button variant="info" type="submit" onclick="return confirm('Are you sure?')">
                                         Chat {{ $order->user->username }}
-                                    </x-button>
+                                    </x-button> --}}
                                 @endif
                                 @if (auth()->user()->role == 1 && $order->package->user_id != auth()->user()->id)
                                     @if ($order->status == 'finished' && $order->rating == null)
