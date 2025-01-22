@@ -1212,7 +1212,7 @@
 
 <body class="font-sans antialiased dark:bg-black dark:text-white/50 h-screen w-screen" <section
     class="w-screen bg-fill bg-center bg-cover"
-    style="background-image: url('{{ asset('assets/images/hero-background.png') }}'); height: calc(100vh - 100px);">
+    style="background-image: url('{{ asset('assets/images/msbreew.jpg') }}'); height: calc(100vh - 100px);">
     <div class="absolute h-screen w-screen z-10 bg-gradient-to-r from-pink to-blue-700 opacity-75"></div>
     <header class="relative z-20 container flex justify-between items-center mx-auto h-[100px] px-4 md:px-0">
         <h2 class="text-2xl font-bold text-white relative z-20">
