@@ -1254,9 +1254,21 @@
             </h2>
         </div>
         <a href="{{ route('register') }}">
-            <button class="w-[200px] h-[50px] text-xl font-bold bg-pink text-white rounded">
-                FIND NOW!
-            </button>
+            @if (!auth()->user())
+                <a href="{{ route('register') }}">
+                    <button class="bg-pink text-white font-bold py-2 px-4 rounded">FIND NOW!</button>
+                </a>
+            @else 
+                @if (auth()->user()->role == 0)
+                    <a href="{{ route('admin.dashboard') }}">
+                        <button class="bg-pink text-white font-bold py-2 px-4 rounded">FIND NOW!</button>
+                    </a>
+                @elseif(auth()->user()->role == 1)
+                    <a href="{{ route('client.dashboard') }}">
+                        <button class="bg-pink text-white font-bold py-2 px-4 rounded">FIND NOW!</button>
+                    </a>
+                @endif
+            @endif
         </a>
     </div>
     </section>
