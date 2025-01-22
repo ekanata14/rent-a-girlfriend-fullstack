@@ -59,9 +59,9 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         if ($user->role == 0) {
-            return redirect(route('admin.dashboard', absolute: false));
+            return redirect(route('admin.dashboard', absolute: false))->with('success', 'Registration successful. Welcome'. $user->username);
         } else if ($user->role == 1) {
-            return redirect(route('client.dashboard', absolute: false));
+            return redirect(route('client.dashboard', absolute: false))->with('success', 'Registration successful. Welcome'. $user->username);
         }
     }
 }
